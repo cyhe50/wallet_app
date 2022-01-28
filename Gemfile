@@ -5,6 +5,8 @@ ruby '2.6.3'
 
 gem 'devise', '~> 4.7'
 gem 'annotate', '~> 3.0'
+gem 'grape', '~> 1.5'
+gem 'grape-entity', '~> 0.9'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
