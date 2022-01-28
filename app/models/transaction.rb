@@ -20,6 +20,8 @@
 #  index_transactions_on_user_id     (user_id)
 #
 class Transaction < ApplicationRecord
+  include Transaction::AasmState
+
   belongs_to :user
   belongs_to :account
 
