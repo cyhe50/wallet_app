@@ -23,4 +23,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, uniqueness: true
+
+  has_many :accounts
+  Account.currencies.keys.each do |currency|
+    has_one "#{currency}_account".to_sym, -> { in_currency(currency) }, class_name: "Account"
+  end
 end
