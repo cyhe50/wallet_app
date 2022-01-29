@@ -24,6 +24,7 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :account
+  counter_culture :account, column_name: 'balance', delta_column: 'amount'
 
   enum action: { purchase: 0, refund: 1 }
   enum currency: Account.currencies
