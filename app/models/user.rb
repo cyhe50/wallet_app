@@ -28,4 +28,6 @@ class User < ApplicationRecord
   Account.currencies.keys.each do |currency|
     has_one "#{currency}_account".to_sym, -> { in_currency(currency) }, class_name: "Account"
   end
+
+  has_many :transactions
 end

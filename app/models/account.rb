@@ -15,6 +15,7 @@
 #
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :transactions
 
   enum currency: { usd: 0 }
   scope :in_currency, ->(currency) { where(currency: currency) }
