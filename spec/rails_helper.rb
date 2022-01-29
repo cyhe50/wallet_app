@@ -8,7 +8,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.use_transactional_fixtures = false

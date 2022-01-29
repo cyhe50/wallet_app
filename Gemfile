@@ -47,7 +47,7 @@ group :development, :test do
   gem "awesome_print", '~> 1.8'
   gem "pry-rails"
   gem 'rspec-rails', '~> 4.1.0'
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
