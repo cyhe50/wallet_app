@@ -8,6 +8,8 @@ gem 'annotate', '~> 3.0'
 gem 'grape', '~> 1.5'
 gem 'grape-entity', '~> 0.9'
 
+gem 'figaro'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
