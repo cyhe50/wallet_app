@@ -16,6 +16,6 @@ class API::V1::Auth < Grape::API
     mount API::V1::Auth::Deposit
     mount API::V1::Auth::Withdraw
     mount API::V1::Auth::Transfer
-    mount API::V1::Auth::Balances
+    mount API::V1::Auth::Accounts
   end
 end
