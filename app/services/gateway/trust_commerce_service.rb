@@ -11,8 +11,8 @@ module Gateway
       @trust_commerce_gateway = Gateway::TrustCommerce::Base.new
     end
 
-    def purchase(amount, currency = 'usd')
-      return false unless creditcard.validate.empty?
+    def purchase!(amount, currency = 'usd')
+      raise Error, creditcard.validate unless creditcard.validate.empty?
 
       ActiveRecord::Base.transaction do
         # check authorization

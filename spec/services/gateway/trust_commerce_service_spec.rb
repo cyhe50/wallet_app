@@ -48,7 +48,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:capture).
           and_return(success_cap_response)
 
-        service.purchase(40, 'usd')
+        service.purchase!(40, 'usd')
 
         expect(Transaction.count).to eq(1)
         transaction = Transaction.first
@@ -68,7 +68,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:capture).
           and_return(error_response)
 
-        service.purchase(40, 'usd')
+        service.purchase!(40, 'usd')
 
         expect(Transaction.count).to eq(1)
         transaction = Transaction.first
@@ -83,7 +83,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:authorize).
           and_return(error_response)
 
-        expect{ service.purchase(40, 'usd') }.to raise_error(StandardError)
+        expect{ service.purchase!(40, 'usd') }.to raise_error(StandardError)
       end
     end
   end
