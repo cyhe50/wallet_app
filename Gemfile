@@ -9,6 +9,11 @@ gem 'grape', '~> 1.5'
 gem 'grape-entity', '~> 0.9'
 
 gem 'figaro'
+# state machine
+gem "aasm"
+
+gem 'counter_culture', '~> 2.9.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
