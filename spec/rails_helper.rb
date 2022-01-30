@@ -9,7 +9,6 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.include FactoryBot::Syntax::Methods
-  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.use_transactional_fixtures = false
   config.before(:suite) do
@@ -28,7 +27,6 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseCleaner.clean
-    RedisClassy.flushdb
   end
   config.infer_spec_type_from_file_location!
 end
