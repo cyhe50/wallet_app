@@ -100,7 +100,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:refund).
           and_return(success_refund_response)
 
-        service.refund(account, 40)
+        service.refund!(account, 40)
 
         expect(Transaction.count).to eq(2)
         trans = Transaction.last
@@ -113,7 +113,7 @@ describe Gateway::TrustCommerceService do
 
     context "fail to withdraw mondy" do
       it "expect to raise error directly" do
-        expect{ service.refund(40, 'usd') }.to raise_error(StandardError)
+        expect{ service.refund!(40, 'usd') }.to raise_error(StandardError)
       end
     end
   end

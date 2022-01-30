@@ -4,7 +4,7 @@ module Gateway
   class TrustCommerceService
     attr_reader :user, :creditcard, :trust_commerce_gateway
 
-    def initialize(user, creditcard_params)
+    def initialize(user, creditcard_params = {})
       @user = user
       creditcard_params.merge!({ first_name: user.first_name, last_name: user.last_name})
       @creditcard = ActiveMerchant::Billing::CreditCard.new(creditcard_params)
@@ -47,8 +47,8 @@ module Gateway
       end
     end
 
-    def refund(account, amount)
-      return false if account.balance < amount
+    def refund!(account, amount)
+      raise Error, 'insufficient balance' if account.balance < amount
 
       refund_array = account.transactions.reverse.inject([]) do |array, transaction|
                         array << {

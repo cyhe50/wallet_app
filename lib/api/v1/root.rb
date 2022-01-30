@@ -11,6 +11,13 @@ class API::V1::Root < Grape::API
     end
   end
 
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    error!({ error_code: 404, error_message: e.message }, 404)
+  end
+
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    error!({ error_code: 406, error_message: e.message }, 406)
+  end
   mount API::V1::Ping
   mount API::V1::Auth
   mount API::V1::NonAuth
