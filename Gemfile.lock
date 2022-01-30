@@ -29,6 +29,11 @@ GEM
     activejob (5.2.6)
       activesupport (= 5.2.6)
       globalid (>= 0.3.6)
+    activemerchant (1.125.0)
+      activesupport (>= 4.2)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (>= 0.6.9)
+      nokogiri (~> 1.4)
     activemodel (5.2.6)
       activesupport (= 5.2.6)
     activerecord (5.2.6)
@@ -289,6 +294,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  activemerchant
   annotate (~> 3.0)
   awesome_print (~> 1.8)
   bootsnap (>= 1.1.0)
