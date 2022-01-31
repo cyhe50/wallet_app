@@ -26,8 +26,8 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :account
-  belongs_to :transfer_to, class_name: 'User', foreign_key: 'transfer_to'
-  belongs_to :receive_from, class_name: 'User', foreign_key: 'receive_from'
+  belongs_to :transfer_to, class_name: 'User', foreign_key: 'transfer_to', optional: true
+  belongs_to :receive_from, class_name: 'User', foreign_key: 'receive_from', optional: true
 
   counter_culture :account,
   column_name: proc { |t| t.success? ? "balance" : nil },
