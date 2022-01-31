@@ -8,6 +8,8 @@
 #  amount         :float            default(0.0)
 #  currency       :integer
 #  raw_data       :text
+#  receive_from   :integer
+#  transfer_to    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :integer
@@ -24,11 +26,14 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :account
+  belongs_to :transfer_to, class_name: 'User', foreign_key: 'transfer_to', optional: true
+  belongs_to :receive_from, class_name: 'User', foreign_key: 'receive_from', optional: true
+
   counter_culture :account,
   column_name: proc { |t| t.success? ? "balance" : nil },
   delta_column: 'amount'
 
-  enum action: { purchase: 0, refund: 1 }
+  enum action: { purchase: 0, refund: 1, transfer: 2, receive: 3 }
   enum currency: Account.currencies
 
   validate :valid_amount_price
@@ -40,9 +45,13 @@ class Transaction < ApplicationRecord
   def valid_amount_price
     case action
     when 'deposit'
-      errors.add(:amount, 'amount should greater than 0 since it is deposited') if amount <= 0
+      errors.add(:amount, 'should greater than 0 since it is depositing') if amount <= 0
     when 'withdraw'
-      errors.add(:amount, 'amount should less than 0 since it is withdrawed') if amount >= 0
+      errors.add(:amount, 'should less than 0 since it is withdrawing') if amount >= 0
+    when 'send'
+      errors.add(:amount, 'should lesser than 0 since it is transfering to user') if transfer_to.present? && amount >= 0
+    when 'receive'
+      errors.add(:amount, 'should greater than 0 since it is receiving from user') if receive_from.present? && amount <= 0
     end
   end
 

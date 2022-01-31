@@ -48,7 +48,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:capture).
           and_return(success_cap_response)
 
-        service.purchase(40, 'usd')
+        service.purchase!(40, 'usd')
 
         expect(Transaction.count).to eq(1)
         transaction = Transaction.first
@@ -60,7 +60,7 @@ describe Gateway::TrustCommerceService do
       end
     end
 
-    context "fail to deposit mondy" do
+    context "fail to deposit money" do
       it "authenticate pass but capture failed" do
         allow(Gateway::TrustCommerce::Base).to receive(:new).and_return(response_double)
         allow(response_double).to receive(:authorize).
@@ -68,7 +68,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:capture).
           and_return(error_response)
 
-        service.purchase(40, 'usd')
+        service.purchase!(40, 'usd')
 
         expect(Transaction.count).to eq(1)
         transaction = Transaction.first
@@ -83,7 +83,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:authorize).
           and_return(error_response)
 
-        expect{ service.purchase(40, 'usd') }.to raise_error(StandardError)
+        expect{ service.purchase!(40, 'usd') }.to raise_error(StandardError)
       end
     end
   end
@@ -100,7 +100,7 @@ describe Gateway::TrustCommerceService do
         allow(response_double).to receive(:refund).
           and_return(success_refund_response)
 
-        service.refund(account, 40)
+        service.refund!(account, 40)
 
         expect(Transaction.count).to eq(2)
         trans = Transaction.last
@@ -113,7 +113,7 @@ describe Gateway::TrustCommerceService do
 
     context "fail to withdraw mondy" do
       it "expect to raise error directly" do
-        expect{ service.refund(40, 'usd') }.to raise_error(StandardError)
+        expect{ service.refund!(40, 'usd') }.to raise_error(StandardError)
       end
     end
   end
