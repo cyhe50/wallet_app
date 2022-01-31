@@ -48,7 +48,7 @@ class Transaction < ApplicationRecord
       errors.add(:amount, 'should greater than 0 since it is depositing') if amount <= 0
     when 'withdraw'
       errors.add(:amount, 'should less than 0 since it is withdrawing') if amount >= 0
-    when 'send'
+    when 'transfer'
       errors.add(:amount, 'should lesser than 0 since it is transfering to user') if transfer_to.present? && amount >= 0
     when 'receive'
       errors.add(:amount, 'should greater than 0 since it is receiving from user') if receive_from.present? && amount <= 0
