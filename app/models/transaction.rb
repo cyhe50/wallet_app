@@ -8,6 +8,8 @@
 #  amount         :float            default(0.0)
 #  currency       :integer
 #  raw_data       :text
+#  receive_from   :integer
+#  transfer_to    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :integer
@@ -24,6 +26,9 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :account
+  belongs_to :transfer_to, class_name: 'User', foreign_key: 'transfer_to'
+  belongs_to :receive_from, class_name: 'User', foreign_key: 'receive_from'
+
   counter_culture :account,
   column_name: proc { |t| t.success? ? "balance" : nil },
   delta_column: 'amount'

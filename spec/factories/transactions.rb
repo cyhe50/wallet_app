@@ -8,6 +8,8 @@
 #  amount         :float            default(0.0)
 #  currency       :integer
 #  raw_data       :text
+#  receive_from   :integer
+#  transfer_to    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :integer
