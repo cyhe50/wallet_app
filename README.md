@@ -3,8 +3,6 @@
 
 ## environment
 
----
-
 Ruby: 2.6.3 version
 
 Rails: 5.2.6 version
@@ -71,23 +69,21 @@ you’ll get 2 users
 
 ## code structure
 
----
-
 ### database
 
 > user
-> 
+>
 1. `first_name, last_name` is used for credit card
 2. was setup with `devise` , but not yet implement authentication
 3. has many accounts and transactions
 
 > account
-> 
+>
 1. one user can has many accounts but with different type of currency
 2. balance is calculated by transaction only when transaction is success
 
 > transaction
-> 
+>
 1. each action creates a transaction
 2. the amount can be positive or negative base on the action
 3. the state is follow by aasm flow
@@ -107,51 +103,51 @@ you’ll get 2 users
 ### library
 
 > Gateway::TrustCommerce
-> 
+>
 1. is already set to be test mode
 2. is a third party pay method which I use it to deposit and withdraw
 3. methods description
-    
+
     `#authorize` ⇒ checking validation before purchasing
-    
-    `#capture` ⇒ after authorize, the capture can actually purchase 
-    
+
+    `#capture` ⇒ after authorize, the capture can actually purchase
+
     `#refund` ⇒ refund by transaction id
-    
+
 
 ### service
 
 > Gateway::TrustCmmerceService
-> 
+>
 1. cascade to the lib I build `Gateway::TrustCommerce`
 2. logic description
-    
-    `#purchase` ⇒ 
-    
+
+    `#purchase` ⇒
+
     1. check creditcard validation
     2. check transaction in third party authorization
     3. initialize transaction and validate it
-    4. post the capture api to the third party to checkout 
+    4. post the capture api to the third party to checkout
     5. if capture success update the transaction info and set it as success, else update the transaction info and set it as failed
-    
-    `#refund` ⇒ 
-    
+
+    `#refund` ⇒
+
     - since refund need a transaction_id
     1. get an array on how many money can be refund by each transaction_id
-    2. refund each transaction_id 
+    2. refund each transaction_id
     3. each refund action will create an transaction
 
 > Gateway::InAppService
-> 
+>
 1. transfer will not go through any third party, it only through my server
 2. logic description
     - set that user1 transfer money to user2
-    
-    `#transfer` ⇒ 
-    
+
+    `#transfer` ⇒
+
     1. create a transaction for user1
     2. create a transaction for user2
-    3. set transaction for user2 as success 
+    3. set transaction for user2 as success
     4. set transaction for user1 as success
 
 ### test
@@ -160,16 +156,14 @@ you’ll get 2 users
 
 ## design concept
 
----
-
 > searching phase
-> 
+>
 1. `deposit` and `withdraw` function should be implemented by third party. My concept was like implement like JKOpay which means I’d like to create an account and cascade the bank api so I start with searching bank api.
 2. Somehow I did’t find any useful bank api, so I’d been thinking cascade like a crypto wallet so I start looking for web3 and ethereum on ROR, I’ve used `web3-eth` gem and it looked good but I got a problem to send transaction via the gem. After searching for about half a day, I finally gave up.
 3. In the end, I use `active_merchant` gem to checkout and refund as  deposit and withdraw
 
 > implement phase
-> 
+>
 1. set up an `lib` object to be the only interface to cascade third party
 2. set up a service for internal server usage, it only connect to the lib object and implement businesses logic here
 3. set up api which would call corresponding service
