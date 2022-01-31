@@ -60,7 +60,7 @@ describe Gateway::TrustCommerceService do
       end
     end
 
-    context "fail to deposit mondy" do
+    context "fail to deposit money" do
       it "authenticate pass but capture failed" do
         allow(Gateway::TrustCommerce::Base).to receive(:new).and_return(response_double)
         allow(response_double).to receive(:authorize).
