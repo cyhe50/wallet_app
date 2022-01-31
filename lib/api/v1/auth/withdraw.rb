@@ -15,7 +15,7 @@ class API::V1::Auth::Withdraw < Grape::API
         raise_error(406, e)
       end
 
-      {data: 'success'}
+      status 201
     end
   end
 end

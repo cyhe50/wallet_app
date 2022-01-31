@@ -24,7 +24,7 @@ describe API::V1::Auth::Deposit, type: :request do
         allow(@double).to receive(:purchase!).and_return(true)
         api_request(:post, "v1", "auth/deposit", body_params, header_params)
 
-        expect(response_data).to eq('success')
+        expect(response_body['status']).to eq('success')
       end
     end
 

@@ -18,7 +18,7 @@ describe API::V1::Auth::Withdraw, type: :request do
         allow(@double).to receive(:refund!).and_return(true)
         api_request(:post, "v1", "auth/withdraw", body_params, header_params)
 
-        expect(response_data).to eq('success')
+        expect(response_body['status']).to eq('success')
       end
     end
 

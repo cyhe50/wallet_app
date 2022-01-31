@@ -1,5 +1,8 @@
 class API::V1::Root < Grape::API
   version  'v1'
+  format   :json
+
+  formatter :json, API::V1::Formatter::Success
 
   helpers do
     def raise_error(code, message)
