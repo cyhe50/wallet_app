@@ -15,6 +15,8 @@ gem "aasm"
 gem 'counter_culture', '~> 2.9.0'
 
 
+gem 'activemerchant'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
@@ -55,6 +57,7 @@ group :development, :test do
   gem "pry-rails"
   gem 'rspec-rails', '~> 4.1.0'
   gem "factory_bot_rails"
+  gem "ffaker", ">=2.3.0"
 end
 
 group :development do

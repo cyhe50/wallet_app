@@ -15,6 +15,10 @@
 #
 FactoryBot.define do
   factory :account do
-    
+    currency { "usd" }
+
+    trait :with_user do
+      association :user
+    end
   end
 end

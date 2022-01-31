@@ -21,6 +21,31 @@
 #
 FactoryBot.define do
   factory :transaction do
-    
+    amount { 100.0 }
+    currency { "usd" }
+
+    trait :purchase_action do
+      action { "purchase" }
+    end
+
+    trait :refund_action do
+      action { "refund" }
+    end
+
+    trait :success do
+      aasm_state { "success" }
+    end
+
+    trait :failed do
+      aasm_state { "failed" }
+    end
+
+    trait :with_account do
+      association :account
+    end
+
+    trait :with_user do
+      association :user
+    end
   end
 end
