@@ -3,6 +3,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
+gem 'devise', '~> 4.7'
+gem 'annotate', '~> 3.0'
+gem 'grape', '~> 1.5'
+gem 'grape-entity', '~> 0.9'
+
+gem 'figaro'
+# state machine
+gem "aasm"
+
+gem 'counter_culture', '~> 2.9.0'
+
+
+gem 'activemerchant'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
@@ -39,6 +53,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "awesome_print", '~> 1.8'
+  gem "pry-rails"
+  gem 'rspec-rails', '~> 4.1.0'
+  gem "factory_bot_rails"
+  gem "ffaker", ">=2.3.0"
 end
 
 group :development do
@@ -56,6 +75,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem "database_cleaner"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
